@@ -1,0 +1,17 @@
+.profile__add-btn {
+  margin-left: auto;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #fff;
+  background: inherit;
+  background-image: url(../../../images/add.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px 22px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile__add-btn:hover {
+  opacity: 0.6;
+}

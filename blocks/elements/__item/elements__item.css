@@ -1,0 +1,5 @@
+.elements__item {
+  font-size: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}

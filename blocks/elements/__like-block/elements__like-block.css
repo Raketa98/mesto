@@ -1,7 +1,7 @@
-.profile {
-  margin: 36px auto 0;
-  max-width: 880px;
+.elements__like-block {
+  min-height: 79px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #fff;
 }

@@ -1,0 +1,10 @@
+.popup__input-desc {
+  max-width: 358px;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #000;
+  outline: none;
+  border: none;
+  margin-bottom: 13px;
+}

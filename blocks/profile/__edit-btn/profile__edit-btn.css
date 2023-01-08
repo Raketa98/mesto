@@ -1,7 +1,4 @@
 .profile__edit-btn {
-  /* position: absolute;
-  top: 15px;
-  right: 0; */
   width: 24px;
   height: 24px;
   border: 1px solid #fff;
@@ -10,7 +7,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 10px 10px;
-  object-fit: cover;
   margin-top: 15px;
   cursor: pointer;
 }

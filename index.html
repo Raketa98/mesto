@@ -11,7 +11,7 @@
   <header class="header">
     <img src="./images/logo/logo.svg" alt="логотип компании" class="header__logo">
   </header>
-  <main>
+  <main class="content">
     <section class="profile">
       <img src="./images/cousteau.jpg" alt="фото" class="profile__avatar">
       <div class="profile__info">
@@ -27,42 +27,42 @@
           <img src="./images/karachayevsk.jpg" alt="Карачаевск" class="elements__img">
           <div class="elements__like-block">
             <h2 class="elements__title">Карачаевск</h2>
-            <button class="elements__like-btn elements__like-btn_active"></button>
+            <button class="elements__like-btn"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/elbrus.png" alt="Эльбрус" class="elements__img">
           <div class="elements__like-block">
             <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__like-btn elements__like-btn_active"></button>
+            <button class="elements__like-btn"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/dombay.jpg" alt="Домбай" class="elements__img">
           <div class="elements__like-block">
             <h2 class="elements__title">Домбай</h2>
-            <button class="elements__like-btn elements__like-btn_active"></button>
+            <button class="elements__like-btn"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/elbrus.png" alt="Эльбрус" class="elements__img">
           <div class="elements__like-block">
             <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__like-btn elements__like-btn_active"></button>
+            <button class="elements__like-btn"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/dombay.jpg" alt="Домбай" class="elements__img">
           <div class="elements__like-block">
             <h2 class="elements__title">Домбай</h2>
-            <button class="elements__like-btn elements__like-btn_active"></button>
+            <button class="elements__like-btn"></button>
           </div>
         </li>
         <li class="elements__item">
           <img src="./images/karachayevsk.jpg" alt="Карачаево-Черкесия" class="elements__img">
           <div class="elements__like-block">
             <h2 class="elements__title">Карачаево-Черкесия</h2>
-            <button class="elements__like-btn elements__like-btn_active"></button>
+            <button class="elements__like-btn"></button>
           </div>
         </li>
       </ul>
@@ -71,6 +71,19 @@
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <form class="popup__form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__input-name">
+        <hr class="popup__first-line">
+        <input type="text" class="popup__input-desc">
+        <hr class="popup__second-line">
+        <button type="submit" class="popup__btn">Сохранить</button>
+        <div class="popup__close"></div>
+      </form>
+    </div>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>

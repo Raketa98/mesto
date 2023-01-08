@@ -8,3 +8,11 @@
   border: none;
   margin-bottom: 13px;
 }
+
+@media screen and (max-width: 560px) {
+  .popup__input-desc {
+    max-width: 238px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

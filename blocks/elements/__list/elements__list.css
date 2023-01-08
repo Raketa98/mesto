@@ -6,3 +6,22 @@
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   gap: 20px 17px;
 }
+
+@media screen and (max-width: 1000px) {
+  .elements__list { 
+    grid-template-columns: repeat(auto-fit, minmax(252px, 1fr));
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .elements__list { 
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .elements__list { 
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    gap: 20px;
+  }
+}

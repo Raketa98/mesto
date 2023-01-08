@@ -4,3 +4,9 @@
   margin-bottom: 30px;
   opacity: 0.5;
 }
+
+@media screen and (max-width: 560px) {
+  .popup__first-line {
+    width: 238px;
+  }
+}

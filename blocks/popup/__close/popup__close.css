@@ -2,11 +2,12 @@
   width: 32px;
   height: 32px;
   cursor: pointer;
+  border: none;
   background-image: url(../../../images/close.svg);
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
-  top: -81px;
+  top: -74px;
   right: -74px;
 }
 

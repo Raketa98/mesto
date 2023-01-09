@@ -3,8 +3,8 @@ const btnEdit = document.querySelector('.profile__edit-btn');
 const userName = document.querySelector('.profile__name');
 const userDesc = document.querySelector('.profile__desc');
 const btnClose = document.querySelector('.popup__close');
-const inputName = document.querySelector('.popup__input-name');
-const inputDesc = document.querySelector('.popup__input-desc');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputDesc = document.querySelector('.popup__input_type_desc');
 const formElement = document.querySelector('.popup__form');
 
 const openPopup = function() {

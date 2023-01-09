@@ -1,5 +1,6 @@
 .popup__form {
   display: grid;
+  width: 358px;
   position: relative;
 }
 

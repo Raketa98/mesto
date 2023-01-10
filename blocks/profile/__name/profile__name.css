@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   max-width: 294px;
+  min-width: 180px;
   margin-right: 19px;
   margin-bottom: 9px;
   font-size: 42px;
@@ -15,6 +16,7 @@
 @media screen and (max-width: 710px) {
   .profile__name { 
     max-width: 189px;
+    text-align: center;
     font-size: 27px;
     line-height: 33px;
     margin-right: 10px;

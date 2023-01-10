@@ -18,9 +18,10 @@
 
 @media screen and (max-width: 560px) {
   .popup__close {
+    background-image: url(../../../images/closeMobile.svg);
     width: 20px;
     height: 20px;
-    top: -62px;
-    right: -24px;
+    top: -60px;
+    right: -23px;
   }
 }

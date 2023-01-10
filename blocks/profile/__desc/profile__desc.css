@@ -1,6 +1,7 @@
 .profile__desc {
   margin: 0;
   padding: 0;
+  max-width: 336px;
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
@@ -10,7 +11,8 @@
 }
 
 @media screen and (max-width: 710px) {
-  .profile__desc { 
+  .profile__desc {
+    max-width: 189px;
     font-size: 14px;
     line-height: 10px;
     margin-left: 16px;

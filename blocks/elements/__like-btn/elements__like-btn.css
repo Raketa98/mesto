@@ -6,10 +6,9 @@
   background-image: url(../../../images/like.svg);
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 22px;
   cursor: pointer;
 }
 
 .elements__like-btn:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }

@@ -4,8 +4,8 @@
 
 @media screen and (max-width: 510px) {
   .header__logo {
-    max-width: 103px;
+    max-width: 104px;
     margin-bottom: 31px;
-    margin-left: 27px;
+    margin-left: 21px;
   }
 }

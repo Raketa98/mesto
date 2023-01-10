@@ -1,13 +1,5 @@
 .elements__like-btn_active {
-  width: 22px;
-  height: 19px;
-  border: none;
-  background: #fff;
   background-image: url(../../../../images/blackLike.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 22px;
-  cursor: pointer;
 }
 
 .elements__like-btn_active:hover {

@@ -1,4 +1,12 @@
 .elements__img {
-  width: 100%;
+  width: 282px;
+  height: 282px;
   object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .elements__img { 
+    width: 100%;
+  }
 }

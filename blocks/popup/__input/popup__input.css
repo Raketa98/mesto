@@ -2,7 +2,7 @@
   padding: 0;
   max-width: 358px;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 15px;
   font-weight: 400;
   color: #000;
   outline: none;
@@ -19,7 +19,9 @@
 @media screen and (max-width: 560px) {
   .popup__input {
     max-width: 238px;
-    font-size: 14px;
-    line-height: 17px;
+  }
+
+  .popup__input:nth-child(2n+1){
+    margin-bottom: 45px;
   }
 }

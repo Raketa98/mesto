@@ -1,7 +1,8 @@
 .elements__like-block {
-  min-height: 79px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #fff;
+  border-radius: 0 0 12px 12px;
+  padding: 25px 20px 27px 21px;
 }

@@ -1,0 +1,12 @@
+.popup-add {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0005;
+  backdrop-filter: blur(1px);
+  justify-content: center;
+  align-items: center;
+}

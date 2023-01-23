@@ -1,0 +1,13 @@
+.popup-add__container {
+  padding: 34px 36px 37px;
+  max-width: 430px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 560px) {
+  .popup-add__container {
+    padding: 25px 22px;
+    max-width: 282px;
+  }
+}

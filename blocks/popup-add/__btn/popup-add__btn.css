@@ -1,0 +1,26 @@
+.popup-add__btn {
+  padding: 0;
+  max-width: 358px;
+  min-height: 50px;
+  border: none;
+  border-radius: 2px;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.popup-add__btn:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 560px) {
+  .popup-add__btn {
+    width: 238px;
+    font-size: 14px;
+    line-height: 17px;
+    min-height: 46px;
+  }
+}

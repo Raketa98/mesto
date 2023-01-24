@@ -54,7 +54,26 @@ function closePopupAdd() {
 }
 btnAddClose.addEventListener('click', closePopupAdd);
 
-// массив изображений, создание карточки по шаблону и отображение на странице
+function handleFormSubmitAdd(e) {
+  e.preventDefault;
+
+  const elementsTemplate = document.querySelector('#elements-template').content;
+  const cardElement = elementsTemplate.querySelector('.elements__item').cloneNode(true);
+  
+  cardElement.querySelector('.elements__img').src = inputLink.value;
+  cardElement.querySelector('.elements__img').alt = inputPlace.value;
+  cardElement.querySelector('.elements__title').textContent = inputPlace.value;
+
+  cardElement.querySelector('.elements__like-btn').addEventListener('click', function(e) {
+    e.target.classList.toggle('elements__like-btn_active');
+  })
+
+  elementsContainer.prepend(cardElement);
+
+  closePopupAdd();
+}
+formAddElement.addEventListener('submit', handleFormSubmitAdd);
+// массив изображений, создание карточек по шаблону и отображение на странице
 const initialCards = [
   {
     name: 'Архыз',

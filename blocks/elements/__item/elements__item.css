@@ -1,3 +1,4 @@
 .elements__item {
   font-size: 0;
+  position: relative;
 }

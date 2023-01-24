@@ -45,7 +45,11 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 function openPopupAdd(e) {
   e.preventDefault();
+
   popupBlockAdd.classList.add('popup-add_opened');
+
+  inputPlace.value = '';
+  inputLink.value = '';
 }
 btnAdd.addEventListener('click', openPopupAdd);
 
@@ -68,12 +72,16 @@ function handleFormSubmitAdd(e) {
     e.target.classList.toggle('elements__like-btn_active');
   })
 
+  cardElement.querySelector('.elements__delete-btn').addEventListener('click', function(e) {
+    e.target.closest('.elements__item').remove();
+  })
+
   elementsContainer.prepend(cardElement);
 
   closePopupAdd();
 }
 formAddElement.addEventListener('submit', handleFormSubmitAdd);
-// массив изображений, создание карточек по шаблону и отображение на странице
+// массив изображений, создание карточек по шаблону, отображение и удаление на странице
 const initialCards = [
   {
     name: 'Архыз',
@@ -111,6 +119,10 @@ function createCards(val) {
 
   cardElement.querySelector('.elements__like-btn').addEventListener('click', function(e) {
     e.target.classList.toggle('elements__like-btn_active');
+  })
+
+  cardElement.querySelector('.elements__delete-btn').addEventListener('click', function(e) {
+    e.target.closest('.elements__item').remove();
   })
 
   return cardElement;

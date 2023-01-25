@@ -35,19 +35,15 @@ btnClose.addEventListener('click', closePopup);
 
 function handleFormSubmit(e) {
   e.preventDefault;
-
   userName.textContent = inputName.value;
   userDesc.textContent = inputDesc.value;
-
   closePopup();
 }
 formElement.addEventListener('submit', handleFormSubmit);
 
 function openPopupAdd(e) {
   e.preventDefault();
-
   popupBlockAdd.classList.add('popup-add_opened');
-
   inputPlace.value = '';
   inputLink.value = '';
 }
@@ -60,7 +56,6 @@ btnAddClose.addEventListener('click', closePopupAdd);
 
 function handleFormSubmitAdd(e) {
   e.preventDefault;
-
   const elementsTemplate = document.querySelector('#elements-template').content;
   const cardElement = elementsTemplate.querySelector('.elements__item').cloneNode(true);
   
@@ -70,17 +65,20 @@ function handleFormSubmitAdd(e) {
 
   cardElement.querySelector('.elements__like-btn').addEventListener('click', function(e) {
     e.target.classList.toggle('elements__like-btn_active');
-  })
+  });
 
   cardElement.querySelector('.elements__delete-btn').addEventListener('click', function(e) {
     e.target.closest('.elements__item').remove();
-  })
+  });
+
+  cardElement.querySelector('.elements__img').addEventListener('click', openBigImage);
 
   elementsContainer.prepend(cardElement);
 
   closePopupAdd();
 }
 formAddElement.addEventListener('submit', handleFormSubmitAdd);
+
 // массив изображений, создание карточек по шаблону, отображение и удаление на странице
 const initialCards = [
   {
@@ -119,11 +117,13 @@ function createCards(val) {
 
   cardElement.querySelector('.elements__like-btn').addEventListener('click', function(e) {
     e.target.classList.toggle('elements__like-btn_active');
-  })
+  });
 
   cardElement.querySelector('.elements__delete-btn').addEventListener('click', function(e) {
     e.target.closest('.elements__item').remove();
-  })
+  });
+
+  cardElement.querySelector('.elements__img').addEventListener('click', openBigImage);
 
   return cardElement;
 }
@@ -131,3 +131,28 @@ function createCards(val) {
 initialCards.forEach(el => {
   elementsContainer.prepend(createCards(el));
 })
+
+// блок картинки
+const popupBlockImg = document.querySelector('.popup-img');
+const btnImgClose = document.querySelector('.popup-img__close');
+const popupImgElementImage = document.querySelector('.popup-img__image');
+const popupImgElementTitle = document.querySelector('.popup-img__title');
+const elementsImg = document.querySelectorAll('.elements__img');
+
+function openPopupImg() {
+  popupBlockImg.classList.add('popup-img_opened');
+}
+elementsImg.forEach(el => {
+  el.addEventListener('click', openPopupImg);
+})
+
+function openBigImage(e) {
+  popupImgElementImage.src = e.target.src;
+  popupImgElementImage.alt = e.target.alt;
+  popupImgElementTitle.textContent = e.target.alt;
+}
+
+function closePopupImg () {
+  popupBlockImg.classList.remove('popup-img_opened');
+}
+btnImgClose.addEventListener('click', closePopupImg);

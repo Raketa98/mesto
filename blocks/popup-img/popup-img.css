@@ -1,4 +1,4 @@
-.popup-add {
+.popup-img {
   /* display: none; */
   display: flex;
   visibility: hidden;
@@ -9,7 +9,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0005;
+  background-color: #0009;
   backdrop-filter: blur(1px);
   justify-content: center;
   align-items: center;

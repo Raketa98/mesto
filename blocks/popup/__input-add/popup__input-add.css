@@ -1,4 +1,4 @@
-.popup-add__input {
+.popup__input-add {
   padding: 0;
   max-width: 358px;
   font-size: 14px;
@@ -12,20 +12,20 @@
   padding-bottom: 11px;
 }
 
-.popup-add__input::placeholder {
+.popup__input-add::placeholder {
   color: #C4C4C4;
 }
 
-.popup-add__input:nth-child(2n+1){
+.popup__input-add:nth-child(2n+1){
   margin-bottom: 48px;
 }
 
 @media screen and (max-width: 560px) {
-  .popup-add__input {
+  .popup__input-add {
     max-width: 238px;
   }
 
-  .popup-add__input:nth-child(2n+1){
+  .popup__input-add:nth-child(2n+1){
     margin-bottom: 45px;
   }
 }

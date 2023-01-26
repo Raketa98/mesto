@@ -1,11 +1,11 @@
-.popup-add__form {
+.popup__form-add {
   display: grid;
   width: 358px;
   position: relative;
 }
 
 @media screen and (max-width: 560px) {
-  .popup-add__form {
+  .popup__form-add {
     display: flex;
     flex-direction: column;
     width: 238px;

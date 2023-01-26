@@ -1,4 +1,4 @@
-.popup-add__close {
+.popup__close-add {
   width: 32px;
   height: 32px;
   cursor: pointer;
@@ -12,12 +12,12 @@
   right: -74px;
 }
 
-.popup-add__close:hover {
+.popup__close-add:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 560px) {
-  .popup-add__close {
+  .popup__close-add {
     background-image: url(../../../images/closeMobile.svg);
     width: 20px;
     height: 20px;

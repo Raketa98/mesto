@@ -81,10 +81,11 @@ function createCards(el) {
 
 // функция открытия попапа с картинкой
 function openBigImage(el) {
-  openPopup(popupBlockImg);
   popupImgElementImage.src = el.target.src;
   popupImgElementImage.alt = el.target.alt;
   popupImgElementTitle.textContent = el.target.alt;
+
+  openPopup(popupBlockImg);
 }
 
 // открытие и закрытие формы редактирования по кнопке
@@ -107,10 +108,10 @@ formElement.addEventListener('submit', handleFormSubmitEdit);
 btnAdd.addEventListener('click', function(e) {
   e.preventDefault();
 
-  openPopup(popupBlockAdd);
-
   inputPlace.value = '';
   inputLink.value = '';
+
+  openPopup(popupBlockAdd);
 });
 btnAddClose.addEventListener('click', function() {
   closePopup(popupBlockAdd);

@@ -1,11 +1,11 @@
 // блок редактирования
 const popupBlockEdit = document.querySelector('.popup_type_edit');
 const btnEdit = document.querySelector('.profile__edit-btn');
-const userName = document.querySelector('.profile__name');
-const userDesc = document.querySelector('.profile__desc');
-const btnClose = document.querySelector('.popup__close');
-const inputName = document.querySelector('.popup__input_type_name');
-const inputDesc = document.querySelector('.popup__input_type_desc');
+const userNameProfile = document.querySelector('.profile__name');
+const userDescProfile = document.querySelector('.profile__desc');
+const btnEditClose = document.querySelector('.popup__close');
+const inputNameProfile = document.querySelector('.popup__input_type_name');
+const inputDescProfile = document.querySelector('.popup__input_type_desc');
 // блок добаления
 const popupBlockAdd = document.querySelector('.popup_type_add');
 const btnAdd = document.querySelector('.profile__add-btn');
@@ -15,7 +15,7 @@ const btnAddClose = document.querySelector('.popup__close-add');
 const inputPlace = document.querySelector('.popup__input-add_type_place');
 const inputLink = document.querySelector('.popup__input-add_type_link');
 // формы
-const formElement = document.querySelector('.popup__form');
+const formEditElement = document.querySelector('.popup__form');
 const formAddElement = document.querySelector('.popup__form-add');
 // контейнер для шаблона
 const elementsContainer = document.querySelector('.elements__list');
@@ -38,8 +38,8 @@ function closePopup(popup) {
 function handleFormSubmitEdit(e) {
   e.preventDefault;
 
-  userName.textContent = inputName.value;
-  userDesc.textContent = inputDesc.value;
+  userNameProfile.textContent = inputNameProfile.value;
+  userDescProfile.textContent = inputDescProfile.value;
   
   closePopup(popupBlockEdit);
 }
@@ -94,15 +94,15 @@ btnEdit.addEventListener('click', function(e) {
 
   openPopup(popupBlockEdit);
 
-  inputName.value = userName.textContent;
-  inputDesc.value = userDesc.textContent;
+  inputNameProfile.value = userNameProfile.textContent;
+  inputDescProfile.value = userDescProfile.textContent;
 });
-btnClose.addEventListener('click', function() {
+btnEditClose.addEventListener('click', function() {
   closePopup(popupBlockEdit);
 });
 
 // добавление изменений по кнопке сохранить
-formElement.addEventListener('submit', handleFormSubmitEdit);
+formEditElement.addEventListener('submit', handleFormSubmitEdit);
 
 // открытие и закрытие формы добавления
 btnAdd.addEventListener('click', function(e) {

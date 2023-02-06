@@ -15,7 +15,7 @@ const btnAddClose = document.querySelector('.popup__close-add');
 const inputPlace = document.querySelector('.popup__input-add_type_place');
 const inputLink = document.querySelector('.popup__input-add_type_link');
 // формы
-const formEditElement = document.querySelector('.popup__form');
+const formEditElement = document.querySelector('.popup__form-edit');
 const formAddElement = document.querySelector('.popup__form-add');
 // контейнер для шаблона
 const elementsContainer = document.querySelector('.elements__list');
@@ -29,9 +29,26 @@ const elementsImg = document.querySelectorAll('.elements__img');
 // две общие функции открытия и закрытия модальных окон
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeEscPopup, {once: true});
+  popup.addEventListener('click', closeOverlayPopup, {once: true});
 }
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+}
+
+// функция закрытие попапа Esc
+function closeEscPopup(e) {
+  if (e.key === 'Escape') {
+    const selectorPopupOpened = document.querySelector('.popup_opened');
+    closePopup(selectorPopupOpened);
+  }
+}
+
+// функция закрытие попапа overlay
+function closeOverlayPopup(e) {
+  if (e.target === this) {
+    closePopup(e.target);
+  }
 }
 
 // функция сохранения изменений при закрытии формы редактирования
@@ -92,10 +109,10 @@ function openBigImage(el) {
 btnEdit.addEventListener('click', function(e) {
   e.preventDefault();
 
-  openPopup(popupBlockEdit);
-
   inputNameProfile.value = userNameProfile.textContent;
   inputDescProfile.value = userDescProfile.textContent;
+
+  openPopup(popupBlockEdit);
 });
 btnEditClose.addEventListener('click', function() {
   closePopup(popupBlockEdit);

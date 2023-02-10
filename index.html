@@ -14,9 +14,11 @@
   <main class="content">
     <section class="profile">
       <img src="./images/cousteau.jpg" alt="фото" class="profile__avatar">
-      <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
+      <div>
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-btn" type="button"></button>
+        </div>
         <p class="profile__desc">Исследователь океана</p>
       </div>
       <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
@@ -31,23 +33,27 @@
   </footer>
   <div class="popup popup_type_edit">
     <div class="popup__container">
-      <form name="profile-form" class="popup__form-edit" onsubmit="return false;">
+      <form name="profile-form" class="popup__form popup__form-edit" novalidate onsubmit="return false;">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" placeholder="Введите имя" name="name" class="popup__input popup__input_type_name">
-        <input type="text" placeholder="Введите профессию" name="desc" class="popup__input popup__input_type_desc">
+        <input id="name-input" type="text" placeholder="Введите имя" name="name" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
+        <span class="name-input-error popup__input-error"></span>
+        <input id="desc-input" type="text" placeholder="Введите профессию" name="desc" class="popup__input popup__input_type_desc" required minlength="2" maxlength="200">
+        <span class="desc-input-error popup__input-error"></span>
         <button type="submit" class="popup__btn">Сохранить</button>
         <button type="button" aria-label="Закрыть" class="popup__close"></button>
       </form>
     </div>
   </div>
   <div class="popup popup_type_add">
-    <div class="popup__container-add">
-      <form name="add-form" class="popup__form-add" onsubmit="return false;">
+    <div class="popup__container">
+      <form name="add-form" class="popup__form popup__form-add" novalidate onsubmit="return false;">
         <h2 class="popup__title-add">Новое место</h2>
-        <input type="text" placeholder="Название" name="place" class="popup__input-add popup__input-add_type_place">
-        <input type="text" placeholder="Ссылка на картинку" name="link" class="popup__input-add popup__input-add_type_link">
-        <button type="submit" class="popup__btn-add">Создать</button>
-        <button type="button" aria-label="Закрыть" class="popup__close-add"></button>
+        <input id="place-input" type="text" placeholder="Название" name="place" class="popup__input popup__input_type_place popup__input_placeholder" required minlength="2" maxlength="30">
+        <span class="place-input-error popup__input-error"></span>
+        <input id="link-input" type="url" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_type_link popup__input_placeholder" required>
+        <span class="link-input-error popup__input-error"></span>
+        <button type="submit" class="popup__btn">Создать</button>
+        <button type="button" aria-label="Закрыть" class="popup__close"></button>
       </form>
     </div>
   </div>
@@ -69,7 +75,7 @@
     </li>
   </template>
   <script defer src="./js/index.js"></script>
-  <script src="./js/initialCards.js"></script>
+  <script src="./js/constants.js"></script>
   <script src="./js/validate.js"></script>
 </body>
 </html>

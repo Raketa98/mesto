@@ -3,17 +3,19 @@ const popupBlockEdit = document.querySelector('.popup_type_edit');
 const btnEdit = document.querySelector('.profile__edit-btn');
 const userNameProfile = document.querySelector('.profile__name');
 const userDescProfile = document.querySelector('.profile__desc');
-const btnEditClose = document.querySelector('.popup__close');
+const btnEditClose = popupBlockEdit.querySelector('.popup__close');
 const inputNameProfile = document.querySelector('.popup__input_type_name');
 const inputDescProfile = document.querySelector('.popup__input_type_desc');
+const btnPopupEditSave = popupBlockEdit.querySelector('.popup__btn');
 // блок добаления
 const popupBlockAdd = document.querySelector('.popup_type_add');
 const btnAdd = document.querySelector('.profile__add-btn');
 const placeTitle = document.querySelector('.elements__title');
 const placeLink = document.querySelector('.elements__img');
-const btnAddClose = document.querySelector('.popup__close-add');
-const inputPlace = document.querySelector('.popup__input-add_type_place');
-const inputLink = document.querySelector('.popup__input-add_type_link');
+const btnAddClose = popupBlockAdd.querySelector('.popup__close');
+const inputPlace = document.querySelector('.popup__input_type_place');
+const inputLink = document.querySelector('.popup__input_type_link');
+const btnPopupAddCreate = popupBlockAdd.querySelector('.popup__btn');
 // формы
 const formEditElement = document.querySelector('.popup__form-edit');
 const formAddElement = document.querySelector('.popup__form-add');
@@ -112,6 +114,15 @@ btnEdit.addEventListener('click', function(e) {
   inputNameProfile.value = userNameProfile.textContent;
   inputDescProfile.value = userDescProfile.textContent;
 
+  const emptyError = popupBlockEdit.querySelectorAll('.popup__input-error');
+  emptyError.forEach(el => el.textContent = '');
+
+  const emptyErrorLine = popupBlockEdit.querySelectorAll('.popup__input');
+  emptyErrorLine.forEach(el => el.classList.remove('popup__input_type_error'));
+
+  btnPopupEditSave.classList.remove('popup__btn_disabled');
+  btnPopupEditSave.disabled = false;
+
   openPopup(popupBlockEdit);
 });
 btnEditClose.addEventListener('click', function() {
@@ -125,8 +136,19 @@ formEditElement.addEventListener('submit', handleFormSubmitEdit);
 btnAdd.addEventListener('click', function(e) {
   e.preventDefault();
 
-  inputPlace.value = '';
-  inputLink.value = '';
+  // inputPlace.value = '';
+  // inputLink.value = '';
+
+  const emptyError = popupBlockAdd.querySelectorAll('.popup__input-error');
+  emptyError.forEach(el => el.textContent = '');
+
+  const emptyErrorLine = popupBlockAdd.querySelectorAll(".popup__input");
+  emptyErrorLine.forEach(el => el.classList.remove("popup__input_type_error"));
+
+  formAddElement.reset();
+
+  btnPopupAddCreate.classList.add('popup__btn_disabled');
+  btnPopupAddCreate.disabled = true;
 
   openPopup(popupBlockAdd);
 });

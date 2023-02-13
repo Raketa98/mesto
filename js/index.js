@@ -3,18 +3,16 @@ const popupBlockEdit = document.querySelector('.popup_type_edit');
 const btnEdit = document.querySelector('.profile__edit-btn');
 const userNameProfile = document.querySelector('.profile__name');
 const userDescProfile = document.querySelector('.profile__desc');
-const btnEditClose = popupBlockEdit.querySelector('.popup__close');
-const inputNameProfile = document.querySelector('.popup__input_type_name');
-const inputDescProfile = document.querySelector('.popup__input_type_desc');
+const inputNameProfile = popupBlockEdit.querySelector('.popup__input_type_name');
+const inputDescProfile = popupBlockEdit.querySelector('.popup__input_type_desc');
 const btnPopupEditSave = popupBlockEdit.querySelector('.popup__btn');
 // блок добаления
 const popupBlockAdd = document.querySelector('.popup_type_add');
 const btnAdd = document.querySelector('.profile__add-btn');
 const placeTitle = document.querySelector('.elements__title');
 const placeLink = document.querySelector('.elements__img');
-const btnAddClose = popupBlockAdd.querySelector('.popup__close');
-const inputPlace = document.querySelector('.popup__input_type_place');
-const inputLink = document.querySelector('.popup__input_type_link');
+const inputPlace = popupBlockAdd.querySelector('.popup__input_type_place');
+const inputLink = popupBlockAdd.querySelector('.popup__input_type_link');
 const btnPopupAddCreate = popupBlockAdd.querySelector('.popup__btn');
 // формы
 const formEditElement = document.querySelector('.popup__form-edit');
@@ -23,19 +21,27 @@ const formAddElement = document.querySelector('.popup__form-add');
 const elementsContainer = document.querySelector('.elements__list');
 // блок картинки
 const popupBlockImg = document.querySelector('.popup_type_image');
-const btnImgClose = document.querySelector('.popup__close-img');
-const popupImgElementImage = document.querySelector('.popup__image-img');
-const popupImgElementTitle = document.querySelector('.popup__title-img');
+const popupImgElementImage = popupBlockImg.querySelector('.popup__image-img');
+const popupImgElementTitle = popupBlockImg.querySelector('.popup__title-img');
 const elementsImg = document.querySelectorAll('.elements__img');
+// все попапы
+const popups = document.querySelectorAll('.popup');
+// все крестики
+const closeButtonsPopup = document.querySelectorAll('.popup__close');
+// поля и линии ошибок
+const emptyError = popupBlockEdit.querySelectorAll('.popup__input-error');
+const emptyErrorLine = popupBlockEdit.querySelectorAll('.popup__input');
 
 // две общие функции открытия и закрытия модальных окон
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeEscPopup, {once: true});
-  popup.addEventListener('click', closeOverlayPopup, {once: true});
+  document.addEventListener('keydown', closeEscPopup);
+  // popup.addEventListener('click', closeOverlayPopup);
 }
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeEscPopup);
+  // popup.removeEventListener('click', closeOverlayPopup);
 }
 
 // функция закрытие попапа Esc
@@ -46,12 +52,12 @@ function closeEscPopup(e) {
   }
 }
 
-// функция закрытие попапа overlay
-function closeOverlayPopup(e) {
-  if (e.target === this) {
-    closePopup(e.target);
-  }
-}
+// // функция закрытие попапа overlay
+// function closeOverlayPopup(e) {
+//   if (e.target === this) {
+//     closePopup(e.target);
+//   }
+// }
 
 // функция сохранения изменений при закрытии формы редактирования
 function handleFormSubmitEdit(e) {
@@ -107,17 +113,15 @@ function openBigImage(el) {
   openPopup(popupBlockImg);
 }
 
-// открытие и закрытие формы редактирования по кнопке
+// открытие формы редактирования 
 btnEdit.addEventListener('click', function(e) {
   e.preventDefault();
 
   inputNameProfile.value = userNameProfile.textContent;
   inputDescProfile.value = userDescProfile.textContent;
 
-  const emptyError = popupBlockEdit.querySelectorAll('.popup__input-error');
   emptyError.forEach(el => el.textContent = '');
 
-  const emptyErrorLine = popupBlockEdit.querySelectorAll('.popup__input');
   emptyErrorLine.forEach(el => el.classList.remove('popup__input_type_error'));
 
   btnPopupEditSave.classList.remove('popup__btn_disabled');
@@ -125,24 +129,13 @@ btnEdit.addEventListener('click', function(e) {
 
   openPopup(popupBlockEdit);
 });
-btnEditClose.addEventListener('click', function() {
-  closePopup(popupBlockEdit);
-});
 
-// добавление изменений по кнопке сохранить
-formEditElement.addEventListener('submit', handleFormSubmitEdit);
-
-// открытие и закрытие формы добавления
+// открытие формы добавления
 btnAdd.addEventListener('click', function(e) {
   e.preventDefault();
 
-  // inputPlace.value = '';
-  // inputLink.value = '';
-
-  const emptyError = popupBlockAdd.querySelectorAll('.popup__input-error');
   emptyError.forEach(el => el.textContent = '');
 
-  const emptyErrorLine = popupBlockAdd.querySelectorAll(".popup__input");
   emptyErrorLine.forEach(el => el.classList.remove("popup__input_type_error"));
 
   formAddElement.reset();
@@ -152,17 +145,32 @@ btnAdd.addEventListener('click', function(e) {
 
   openPopup(popupBlockAdd);
 });
-btnAddClose.addEventListener('click', function() {
-  closePopup(popupBlockAdd);
-});
+
+// добавление изменений по кнопке сохранить
+formEditElement.addEventListener('submit', handleFormSubmitEdit);
 
 // добавление по кнопке создать
 formAddElement.addEventListener('submit', handleFormSubmitAdd);
 
-// закрытие попапа с картинкой
-btnImgClose.addEventListener('click', function() {
-  closePopup(popupBlockImg);
-});
+// // закрытие по крестику любого количества попапов
+// closeButtonsPopup.forEach(el => {
+//   const popup = el.closest('.popup');
+//   el.addEventListener('click', function() {
+//     closePopup(popup)
+//   })
+// })
+
+// закрытие всех крестиков и оверлеем
+popups.forEach(el => {
+  el.addEventListener('mousedown', e => {
+    if (e.target.classList.contains('popup_opened')) { // проверка на вложенность
+      closePopup(el);
+    } 
+    else if (e.target.classList.contains('popup__close')) {
+      closePopup(el);
+    }
+  })
+})
 
 // отрисовка карточек
 initialCards.forEach(el => {

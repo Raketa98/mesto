@@ -28,9 +28,6 @@ const elementsImg = document.querySelectorAll('.elements__img');
 const popups = document.querySelectorAll('.popup');
 // все крестики
 const closeButtonsPopup = document.querySelectorAll('.popup__close');
-// поля и линии ошибок
-const emptyError = popupBlockEdit.querySelectorAll('.popup__input-error');
-const emptyErrorLine = popupBlockEdit.querySelectorAll('.popup__input');
 
 // две общие функции открытия и закрытия модальных окон
 function openPopup(popup) {
@@ -120,12 +117,9 @@ btnEdit.addEventListener('click', function(e) {
   inputNameProfile.value = userNameProfile.textContent;
   inputDescProfile.value = userDescProfile.textContent;
 
-  emptyError.forEach(el => el.textContent = '');
+  removeErrors(formEditElement, config);
 
-  emptyErrorLine.forEach(el => el.classList.remove('popup__input_type_error'));
-
-  btnPopupEditSave.classList.remove('popup__btn_disabled');
-  btnPopupEditSave.disabled = false;
+  enableButtonAtFirst(btnPopupEditSave, config)
 
   openPopup(popupBlockEdit);
 });
@@ -134,14 +128,11 @@ btnEdit.addEventListener('click', function(e) {
 btnAdd.addEventListener('click', function(e) {
   e.preventDefault();
 
-  emptyError.forEach(el => el.textContent = '');
-
-  emptyErrorLine.forEach(el => el.classList.remove("popup__input_type_error"));
-
   formAddElement.reset();
 
-  btnPopupAddCreate.classList.add('popup__btn_disabled');
-  btnPopupAddCreate.disabled = true;
+  removeErrors(formAddElement, config);
+
+  disableButtonAtFirst(btnPopupAddCreate, config);
 
   openPopup(popupBlockAdd);
 });
@@ -152,7 +143,7 @@ formEditElement.addEventListener('submit', handleFormSubmitEdit);
 // добавление по кнопке создать
 formAddElement.addEventListener('submit', handleFormSubmitAdd);
 
-// // закрытие по крестику любого количества попапов
+// // закрытие крестиком любого количества попапов
 // closeButtonsPopup.forEach(el => {
 //   const popup = el.closest('.popup');
 //   el.addEventListener('click', function() {
@@ -160,7 +151,7 @@ formAddElement.addEventListener('submit', handleFormSubmitAdd);
 //   })
 // })
 
-// закрытие всех крестиков и оверлеем
+// закрытие крестиком и оверлеем
 popups.forEach(el => {
   el.addEventListener('mousedown', e => {
     if (e.target.classList.contains('popup_opened')) { // проверка на вложенность

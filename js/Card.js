@@ -5,9 +5,8 @@ export class Card {
     popupBlockImg,
     openBigImage,
     openPopup,
-    closePopup,
-    handleLikeButton,
-    handleDeleteCard) {
+    closePopup
+    ) {
     this._link = data.link;
     this._name = data.name;
     this._templateSelector = templateSelector;
@@ -15,8 +14,16 @@ export class Card {
     this._openBigImage = openBigImage;
     this._openPopup = openPopup;
     this._closePopup = closePopup;
-    this._handleLikeButton = handleLikeButton;
-    this._handDeleteCard = handleDeleteCard;
+  }
+
+  // функция удаления карточки
+  _handleDeleteCard (e) {
+    e.target.closest('.elements__item').remove();
+  }
+
+  // функция поставить лайк
+  _handleLikeButton (e) {
+    e.target.classList.toggle('elements__like-btn_active');
   }
 
   _getTemplate() {
@@ -30,13 +37,13 @@ export class Card {
   }
 
   _setEventListener(cardImg) {
-    cardImg.addEventListener('click', e => {
+    cardImg.addEventListener('click', () => {
       this._openPopup(this._popupBlockImg);
-      this._openBigImage(e);
+      this._openBigImage(this._name, this._link);
     });
 
     this._element.querySelector('.elements__like-btn').addEventListener('click', this._handleLikeButton);
-    this._element.querySelector('.elements__delete-btn').addEventListener('click', this._handDeleteCard);
+    this._element.querySelector('.elements__delete-btn').addEventListener('click', this._handleDeleteCard);
   }
 
   generateCard() {

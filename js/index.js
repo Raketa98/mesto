@@ -32,8 +32,8 @@ const popups = document.querySelectorAll('.popup');
 const formAddValidator = new FormValidator(config, formAddElement);
 const formEditValidator = new FormValidator(config, formEditElement);
 
-formAddValidator.enableValidation(config, formAddElement);
-formEditValidator.enableValidation(config, formEditElement);
+formAddValidator.enableValidation();
+formEditValidator.enableValidation();
 
 // две общие функции открытия и закрытия модальных окон
 function openPopup(popup) {
@@ -62,23 +62,47 @@ function closeEscPopup(e) {
 //   }
 // }
 
-// функция удаления карточки
-function handleDeleteCard (e) {
-  e.target.closest('.elements__item').remove();
-}
-
-// функция поставить лайк
-function handleLikeButton (e) {
-  e.target.classList.toggle('elements__like-btn_active');
-}
-
 // функция открытия попапа с картинкой
-export function openBigImage(el) {
-  popupImgElementImage.src = el.target.src;
-  popupImgElementImage.alt = el.target.alt;
-  popupImgElementTitle.textContent = el.target.alt;
+function openBigImage(name, link) {
+  popupImgElementImage.src = link;
+  popupImgElementImage.alt = name;
+  popupImgElementTitle.textContent = name;
 
   openPopup(popupBlockImg);
+}
+
+// функция формы редактирования
+function handleFormProfile() {
+  inputNameProfile.value = userNameProfile.textContent;
+  inputDescProfile.value = userDescProfile.textContent;
+
+  formEditValidator.removeErrors(formEditElement);
+  formEditValidator.enableButton(btnPopupEditSave);
+
+  openPopup(popupBlockEdit);
+}
+
+// функция формы добавления
+function handleFormAdd() {
+  formAddElement.reset();
+  formAddValidator.removeErrors(formAddElement);
+  formAddValidator.disableButton(btnPopupAddCreate);
+
+  openPopup(popupBlockAdd);
+}
+
+function createCardElement(el) {
+  const card = new Card(
+    el,
+    '#elements-template',
+    popupBlockImg, 
+    openBigImage,
+    openPopup,
+    closePopup
+    );
+  const newCard = card.generateCard();
+
+  return newCard;
 }
 
 // функция сохранения изменений при закрытии формы редактирования
@@ -95,71 +119,20 @@ function handleFormSubmitEdit(e) {
 function handleFormSubmitAdd(e) {
   e.preventDefault;
 
-  // elementsContainer.prepend(createCards({
-  //   name: inputPlace.value,
-  //   link: inputLink.value
-  // }));
-  const card = new Card({
+  const newCard = createCardElement({
     name: inputPlace.value,
     link: inputLink.value
-  },
-  '#elements-template',
-  popupBlockImg,
-  openBigImage,
-  openPopup,
-  closePopup,
-  handleLikeButton,
-  handleDeleteCard
-  );
-
-  const newCard = card.generateCard();
+  });
   elementsContainer.prepend(newCard);
 
   closePopup(popupBlockAdd);
 }
 
-// // функция создания новой карточки
-// function createCards(el) {
-//   const elementsTemplate = document.querySelector('#elements-template').content;
-//   const cardElement = elementsTemplate.querySelector('.elements__item').cloneNode(true);
-//   const elementImg = cardElement.querySelector('.elements__img');
-  
-//   elementImg.src = el.link;
-//   elementImg.alt = el.name;
-//   cardElement.querySelector('.elements__title').textContent = el.name;
-
-//   cardElement.querySelector('.elements__like-btn').addEventListener('click', putLike);
-
-//   cardElement.querySelector('.elements__delete-btn').addEventListener('click', deleteCard);
-
-//   elementImg.addEventListener('click', openBigImage);
-  
-//   return cardElement;
-// }
-
 // открытие формы редактирования 
-btnEdit.addEventListener('click', function(e) {
-  e.preventDefault();
-
-  inputNameProfile.value = userNameProfile.textContent;
-  inputDescProfile.value = userDescProfile.textContent;
-
-  formEditValidator.removeErrors(formEditElement, config.inputSelector, config.inputErrorClass);
-  formEditValidator.enableButton(btnPopupEditSave, config.inactiveButtonClass);
-
-  openPopup(popupBlockEdit);
-});
+btnEdit.addEventListener('click', handleFormProfile);
 
 // открытие формы добавления
-btnAdd.addEventListener('click', function(e) {
-  e.preventDefault();
-
-  formAddElement.reset();
-  formAddValidator.removeErrors(formAddElement, config.inputSelector, config.inputErrorClass);
-  formAddValidator.disableButton(btnPopupAddCreate, config.inactiveButtonClass);
-
-  openPopup(popupBlockAdd);
-});
+btnAdd.addEventListener('click', handleFormAdd);
 
 // добавление изменений по кнопке сохранить
 formEditElement.addEventListener('submit', handleFormSubmitEdit);
@@ -187,23 +160,7 @@ popups.forEach(el => {
   })
 })
 
-// // отрисовка карточек
-// initialCards.forEach(el => {
-//   elementsContainer.prepend(createCards(el));
-// });
-
 initialCards.forEach(el => {
-  const card = new Card(
-    el,
-    '#elements-template',
-    popupBlockImg,
-    openBigImage,
-    openPopup,
-    closePopup, 
-    handleLikeButton,
-    handleDeleteCard
-  );
-  
-  const cardList = card.generateCard();
+  const cardList = createCardElement(el);
   elementsContainer.prepend(cardList);
 })

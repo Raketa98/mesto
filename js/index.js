@@ -1,3 +1,6 @@
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import { initialCards, config } from "./constants.js";
 // блок редактирования
 const popupBlockEdit = document.querySelector('.popup_type_edit');
 const btnEdit = document.querySelector('.profile__edit-btn');
@@ -9,8 +12,6 @@ const btnPopupEditSave = popupBlockEdit.querySelector('.popup__btn');
 // блок добаления
 const popupBlockAdd = document.querySelector('.popup_type_add');
 const btnAdd = document.querySelector('.profile__add-btn');
-const placeTitle = document.querySelector('.elements__title');
-const placeLink = document.querySelector('.elements__img');
 const inputPlace = popupBlockAdd.querySelector('.popup__input_type_place');
 const inputLink = popupBlockAdd.querySelector('.popup__input_type_link');
 const btnPopupAddCreate = popupBlockAdd.querySelector('.popup__btn');
@@ -23,11 +24,16 @@ const elementsContainer = document.querySelector('.elements__list');
 const popupBlockImg = document.querySelector('.popup_type_image');
 const popupImgElementImage = popupBlockImg.querySelector('.popup__image-img');
 const popupImgElementTitle = popupBlockImg.querySelector('.popup__title-img');
-const elementsImg = document.querySelectorAll('.elements__img');
 // все попапы
 const popups = document.querySelectorAll('.popup');
-// все крестики
-const closeButtonsPopup = document.querySelectorAll('.popup__close');
+// // все крестики
+// const closeButtonsPopup = document.querySelectorAll('.popup__close');
+// экземпляры класса FormValidator для каждой формы
+const formAddValidator = new FormValidator(config, formAddElement);
+const formEditValidator = new FormValidator(config, formEditElement);
+
+formAddValidator.enableValidation(config, formAddElement);
+formEditValidator.enableValidation(config, formEditElement);
 
 // две общие функции открытия и закрытия модальных окон
 function openPopup(popup) {
@@ -56,6 +62,25 @@ function closeEscPopup(e) {
 //   }
 // }
 
+// функция удаления карточки
+function handDeleteCard (e) {
+  e.target.closest('.elements__item').remove();
+}
+
+// функция поставить лайк
+function handleLikeButton (e) {
+  e.target.classList.toggle('elements__like-btn_active');
+}
+
+// функция открытия попапа с картинкой
+export function openBigImage(el) {
+  popupImgElementImage.src = el.target.src;
+  popupImgElementImage.alt = el.target.alt;
+  popupImgElementTitle.textContent = el.target.alt;
+
+  openPopup(popupBlockImg);
+}
+
 // функция сохранения изменений при закрытии формы редактирования
 function handleFormSubmitEdit(e) {
   e.preventDefault;
@@ -70,45 +95,47 @@ function handleFormSubmitEdit(e) {
 function handleFormSubmitAdd(e) {
   e.preventDefault;
 
-  elementsContainer.prepend(createCards({
+  // elementsContainer.prepend(createCards({
+  //   name: inputPlace.value,
+  //   link: inputLink.value
+  // }));
+  const card = new Card({
     name: inputPlace.value,
     link: inputLink.value
-  }));
+  },
+  '#elements-template',
+  popupBlockImg,
+  openBigImage,
+  openPopup,
+  closePopup,
+  handleLikeButton,
+  handDeleteCard
+  );
+
+  const newCard = card.generateCard();
+  elementsContainer.prepend(newCard);
 
   closePopup(popupBlockAdd);
 }
 
-// функция создания новой карточки
-function createCards(el) {
-  const elementsTemplate = document.querySelector('#elements-template').content;
-  const cardElement = elementsTemplate.querySelector('.elements__item').cloneNode(true);
-  const elementImg = cardElement.querySelector('.elements__img');
+// // функция создания новой карточки
+// function createCards(el) {
+//   const elementsTemplate = document.querySelector('#elements-template').content;
+//   const cardElement = elementsTemplate.querySelector('.elements__item').cloneNode(true);
+//   const elementImg = cardElement.querySelector('.elements__img');
   
-  elementImg.src = el.link;
-  elementImg.alt = el.name;
-  cardElement.querySelector('.elements__title').textContent = el.name;
+//   elementImg.src = el.link;
+//   elementImg.alt = el.name;
+//   cardElement.querySelector('.elements__title').textContent = el.name;
 
-  cardElement.querySelector('.elements__like-btn').addEventListener('click', function(e) {
-    e.target.classList.toggle('elements__like-btn_active');
-  });
+//   cardElement.querySelector('.elements__like-btn').addEventListener('click', putLike);
 
-  cardElement.querySelector('.elements__delete-btn').addEventListener('click', function(e) {
-    e.target.closest('.elements__item').remove();
-  });
+//   cardElement.querySelector('.elements__delete-btn').addEventListener('click', deleteCard);
 
-  elementImg.addEventListener('click', openBigImage);
+//   elementImg.addEventListener('click', openBigImage);
   
-  return cardElement;
-}
-
-// функция открытия попапа с картинкой
-function openBigImage(el) {
-  popupImgElementImage.src = el.target.src;
-  popupImgElementImage.alt = el.target.alt;
-  popupImgElementTitle.textContent = el.target.alt;
-
-  openPopup(popupBlockImg);
-}
+//   return cardElement;
+// }
 
 // открытие формы редактирования 
 btnEdit.addEventListener('click', function(e) {
@@ -117,9 +144,8 @@ btnEdit.addEventListener('click', function(e) {
   inputNameProfile.value = userNameProfile.textContent;
   inputDescProfile.value = userDescProfile.textContent;
 
-  removeErrors(formEditElement, config);
-
-  enableButtonAtFirst(btnPopupEditSave, config)
+  formEditValidator.removeErrors(formEditElement, config.inputSelector, config.inputErrorClass);
+  formEditValidator.enableButton(btnPopupEditSave, config.inactiveButtonClass);
 
   openPopup(popupBlockEdit);
 });
@@ -129,10 +155,8 @@ btnAdd.addEventListener('click', function(e) {
   e.preventDefault();
 
   formAddElement.reset();
-
-  removeErrors(formAddElement, config);
-
-  disableButtonAtFirst(btnPopupAddCreate, config);
+  formAddValidator.removeErrors(formAddElement, config.inputSelector, config.inputErrorClass);
+  formAddValidator.disableButton(btnPopupAddCreate, config.inactiveButtonClass);
 
   openPopup(popupBlockAdd);
 });
@@ -163,7 +187,23 @@ popups.forEach(el => {
   })
 })
 
-// отрисовка карточек
+// // отрисовка карточек
+// initialCards.forEach(el => {
+//   elementsContainer.prepend(createCards(el));
+// });
+
 initialCards.forEach(el => {
-  elementsContainer.prepend(createCards(el));
-});
+  const card = new Card(
+    el,
+    '#elements-template',
+    popupBlockImg,
+    openBigImage,
+    openPopup,
+    closePopup, 
+    handleLikeButton,
+    handDeleteCard
+  );
+  
+  const cardList = card.generateCard();
+  elementsContainer.prepend(cardList);
+})

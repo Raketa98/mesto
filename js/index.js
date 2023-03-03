@@ -63,7 +63,7 @@ function closeEscPopup(e) {
 // }
 
 // функция удаления карточки
-function handDeleteCard (e) {
+function handleDeleteCard (e) {
   e.target.closest('.elements__item').remove();
 }
 
@@ -109,7 +109,7 @@ function handleFormSubmitAdd(e) {
   openPopup,
   closePopup,
   handleLikeButton,
-  handDeleteCard
+  handleDeleteCard
   );
 
   const newCard = card.generateCard();
@@ -201,7 +201,7 @@ initialCards.forEach(el => {
     openPopup,
     closePopup, 
     handleLikeButton,
-    handDeleteCard
+    handleDeleteCard
   );
   
   const cardList = card.generateCard();

@@ -7,7 +7,7 @@ export class Card {
     openPopup,
     closePopup,
     handleLikeButton,
-    handDeleteCard) {
+    handleDeleteCard) {
     this._link = data.link;
     this._name = data.name;
     this._templateSelector = templateSelector;
@@ -16,7 +16,7 @@ export class Card {
     this._openPopup = openPopup;
     this._closePopup = closePopup;
     this._handleLikeButton = handleLikeButton;
-    this._handDeleteCard = handDeleteCard;
+    this._handDeleteCard = handleDeleteCard;
   }
 
   _getTemplate() {

@@ -76,8 +76,8 @@ function handleFormProfile() {
   inputNameProfile.value = userNameProfile.textContent;
   inputDescProfile.value = userDescProfile.textContent;
 
-  formEditValidator.removeErrors(formEditElement);
-  formEditValidator.enableButton(btnPopupEditSave);
+  formEditValidator.removeErrors();
+  formEditValidator.enableButton();
 
   openPopup(popupBlockEdit);
 }
@@ -85,8 +85,8 @@ function handleFormProfile() {
 // функция формы добавления
 function handleFormAdd() {
   formAddElement.reset();
-  formAddValidator.removeErrors(formAddElement);
-  formAddValidator.disableButton(btnPopupAddCreate);
+  formAddValidator.removeErrors();
+  formAddValidator.disableButton();
 
   openPopup(popupBlockAdd);
 }

@@ -2,7 +2,7 @@ export class Card {
   constructor(
     data,
     templateSelector,
-    popupBlockImg,
+    popupBlockImage,
     openBigImage,
     openPopup,
     closePopup
@@ -10,7 +10,7 @@ export class Card {
     this._link = data.link;
     this._name = data.name;
     this._templateSelector = templateSelector;
-    this._popupBlockImg = popupBlockImg
+    this._popupBlockImage = popupBlockImage;
     this._openBigImage = openBigImage;
     this._openPopup = openPopup;
     this._closePopup = closePopup;
@@ -36,9 +36,9 @@ export class Card {
     return templateCard;
   }
 
-  _setEventListener(cardImg) {
-    cardImg.addEventListener('click', () => {
-      this._openPopup(this._popupBlockImg);
+  _setEventListener(cardImage) {
+    cardImage.addEventListener('click', () => {
+      this._openPopup(this._popupBlockImage);
       this._openBigImage(this._name, this._link);
     });
 

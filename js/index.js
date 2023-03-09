@@ -21,9 +21,9 @@ const formAddElement = document.querySelector('.popup__form-add');
 // контейнер для шаблона
 const elementsContainer = document.querySelector('.elements__list');
 // блок картинки
-const popupBlockImg = document.querySelector('.popup_type_image');
-const popupImgElementImage = popupBlockImg.querySelector('.popup__image-img');
-const popupImgElementTitle = popupBlockImg.querySelector('.popup__title-img');
+const popupBlockImage = document.querySelector('.popup_type_image');
+const popupImgElementImage = popupBlockImage.querySelector('.popup__image-img');
+const popupImgElementTitle = popupBlockImage.querySelector('.popup__title-img');
 // все попапы
 const popups = document.querySelectorAll('.popup');
 // // все крестики
@@ -68,7 +68,7 @@ function openBigImage(name, link) {
   popupImgElementImage.alt = name;
   popupImgElementTitle.textContent = name;
 
-  openPopup(popupBlockImg);
+  openPopup(popupBlockImage);
 }
 
 // функция формы редактирования
@@ -95,7 +95,7 @@ function createCardElement(el) {
   const card = new Card(
     el,
     '#elements-template',
-    popupBlockImg, 
+    popupBlockImage, 
     openBigImage,
     openPopup,
     closePopup

@@ -8,13 +8,11 @@ const userNameProfile = document.querySelector('.profile__name');
 const userDescProfile = document.querySelector('.profile__desc');
 const inputNameProfile = popupBlockEdit.querySelector('.popup__input_type_name');
 const inputDescProfile = popupBlockEdit.querySelector('.popup__input_type_desc');
-const btnPopupEditSave = popupBlockEdit.querySelector('.popup__btn');
 // блок добаления
 const popupBlockAdd = document.querySelector('.popup_type_add');
 const btnAdd = document.querySelector('.profile__add-btn');
 const inputPlace = popupBlockAdd.querySelector('.popup__input_type_place');
 const inputLink = popupBlockAdd.querySelector('.popup__input_type_link');
-const btnPopupAddCreate = popupBlockAdd.querySelector('.popup__btn');
 // формы
 const formEditElement = document.querySelector('.popup__form-edit');
 const formAddElement = document.querySelector('.popup__form-add');
@@ -32,6 +30,7 @@ const popups = document.querySelectorAll('.popup');
 const formAddValidator = new FormValidator(config, formAddElement);
 const formEditValidator = new FormValidator(config, formEditElement);
 
+// вызываем валидацию для каждой формы
 formAddValidator.enableValidation();
 formEditValidator.enableValidation();
 
@@ -92,23 +91,14 @@ function handleFormAdd() {
 }
 
 function createCardElement(el) {
-  const card = new Card(
-    el,
-    '#elements-template',
-    popupBlockImage, 
-    openBigImage,
-    openPopup,
-    closePopup
-    );
+  const card = new Card(el, '#elements-template', openBigImage);
   const newCard = card.generateCard();
 
   return newCard;
 }
 
 // функция сохранения изменений при закрытии формы редактирования
-function handleFormSubmitEdit(e) {
-  e.preventDefault;
-
+function handleFormSubmitEdit() {
   userNameProfile.textContent = inputNameProfile.value;
   userDescProfile.textContent = inputDescProfile.value;
   
@@ -116,9 +106,7 @@ function handleFormSubmitEdit(e) {
 }
 
 // функция добавления карточки в список
-function handleFormSubmitAdd(e) {
-  e.preventDefault;
-
+function handleFormSubmitAdd() {
   const newCard = createCardElement({
     name: inputPlace.value,
     link: inputLink.value
@@ -135,10 +123,16 @@ btnEdit.addEventListener('click', handleFormProfile);
 btnAdd.addEventListener('click', handleFormAdd);
 
 // добавление изменений по кнопке сохранить
-formEditElement.addEventListener('submit', handleFormSubmitEdit);
+formEditElement.addEventListener('submit', e => {
+  e.preventDefault();
+  handleFormSubmitEdit();
+});
 
 // добавление по кнопке создать
-formAddElement.addEventListener('submit', handleFormSubmitAdd);
+formAddElement.addEventListener('submit', e => {
+  e.preventDefault();
+  handleFormSubmitAdd();
+});
 
 // // закрытие крестиком любого количества попапов
 // closeButtonsPopup.forEach(el => {

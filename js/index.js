@@ -76,7 +76,7 @@ function handleFormProfile() {
   inputDescProfile.value = userDescProfile.textContent;
 
   formEditValidator.removeErrors();
-  formEditValidator.enableButton();
+  // formEditValidator.enableButton();
 
   openPopup(popupBlockEdit);
 }
